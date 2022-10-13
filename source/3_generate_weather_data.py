@@ -37,7 +37,7 @@ import random, string
 
 df =  pd.DataFrame({
     "REPORT_CODE": [''.join(random.choices(string.ascii_uppercase + string.digits, k=7)) for _ in range(0,n1) ],
-    "DATE" : dates1,
+    "REPORT_DATE" : dates1,
     "LOCATION_ID" : location_id,
     "TEMPERATURE" : np.round(np.random.normal(60, 4, n1),1),
     "OVERCAST" : overcast,
@@ -54,7 +54,7 @@ snow = overcast * np.round(weighted_coin(n1,.6) * np.random.normal(2, 1., n1),2)
 
 df2 = pd.DataFrame({
     "REPORT_CODE": [''.join(random.choices(string.ascii_uppercase + string.digits, k=7)) for _ in range(0,n2) ],
-    "DATE" : dates2,
+    "REPORT_DATE" : dates2,
     "LOCATION_ID" : location_id,
     "TEMPERATURE" : np.round(np.random.normal(30, 4, n2),1),
     "OVERCAST" : overcast,
@@ -70,7 +70,7 @@ n3 = len(dates3)
 
 df3 = pd.DataFrame({
     "REPORT_CODE": [''.join(random.choices(string.ascii_uppercase + string.digits, k=7)) for _ in range(0,n3) ],
-    "DATE" : dates2,
+    "REPORT_DATE" : dates3,
     "LOCATION_ID" : location_id,
     "TEMPERATURE" : np.round(np.random.normal(94, 12, n3),1),
     "OVERCAST" : overcast,
