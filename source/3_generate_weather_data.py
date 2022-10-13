@@ -97,4 +97,5 @@ df.index +=1 # shift index to be 1-based
 df.to_sql("WEATHER_MONITOR",conn, index_label = "ID",if_exists="replace")
 conn.execute("VACUUM;")
 
+conn.execute("UPDATE WEATHER_MONITOR SET DATE = substr(DATE,0,11)")
 pd.read_sql("SELECT * FROM WEATHER_MONITOR", conn)
