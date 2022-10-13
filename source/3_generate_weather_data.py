@@ -33,7 +33,10 @@ lightning = overcast * weighted_coin(n1,.5)
 hail = overcast * weighted_coin(n1, .1)
 tornado = hail * weighted_coin(n1, 1.0)
 
+import random, string
+
 df =  pd.DataFrame({
+    "REPORT_CODE": [''.join(random.choices(string.ascii_uppercase + string.digits, k=7)) for _ in range(0,n1) ],
     "DATE" : dates1,
     "LOCATION_ID" : location_id,
     "TEMPERATURE" : np.round(np.random.normal(60, 4, n1),1),
@@ -50,6 +53,7 @@ n2 = len(dates2)
 snow = overcast * np.round(weighted_coin(n1,.6) * np.random.normal(2, 1., n1),2) 
 
 df2 = pd.DataFrame({
+    "REPORT_CODE": [''.join(random.choices(string.ascii_uppercase + string.digits, k=7)) for _ in range(0,n2) ],
     "DATE" : dates2,
     "LOCATION_ID" : location_id,
     "TEMPERATURE" : np.round(np.random.normal(30, 4, n2),1),
@@ -65,6 +69,7 @@ dates3 = random_dates(pd.to_datetime('2021-06-01'), pd.to_datetime('2021-10-31')
 n3 = len(dates3)
 
 df3 = pd.DataFrame({
+    "REPORT_CODE": [''.join(random.choices(string.ascii_uppercase + string.digits, k=7)) for _ in range(0,n3) ],
     "DATE" : dates2,
     "LOCATION_ID" : location_id,
     "TEMPERATURE" : np.round(np.random.normal(94, 12, n3),1),
@@ -92,4 +97,4 @@ df.index +=1 # shift index to be 1-based
 df.to_sql("WEATHER_MONITOR",conn, index_label = "ID",if_exists="replace")
 conn.execute("VACUUM;")
 
-pd.read_sql("SELECT MAX(ID) FROM WEATHER_MONITOR", conn)
+pd.read_sql("SELECT * FROM WEATHER_MONITOR", conn)
